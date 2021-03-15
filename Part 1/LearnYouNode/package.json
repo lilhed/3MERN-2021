@@ -1,0 +1,11 @@
+{
+  "name": "learnyounode",
+  "version": "1.0.0",
+  "description": "La pratique de NodeJS sera basé sur l'application [LearnYouNode](https://github.com/workshopper/learnyounode).",
+  "main": "01_Salut_le_monde.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
