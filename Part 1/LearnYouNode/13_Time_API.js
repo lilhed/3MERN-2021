@@ -17,8 +17,6 @@ function dateToUnixTime(date) {
     return {'unixtime': date.getTime()};
 }
 
-
-
 function toJSON(data) {
     return JSON.stringify(data);
 }
