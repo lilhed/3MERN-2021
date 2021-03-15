@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = function (dir, ext, callback){
-    ext = '.'+ext
+    let extension = '.' + ext
     fs.readdir(dir, function (err, files) {
         if(err){
             return callback(err)
@@ -10,7 +10,7 @@ module.exports = function (dir, ext, callback){
 
         let filesFiltered = []
         for (let i=0; i < files.length; i++){
-            if(path.extname(files[i]) === ext){
+            if(path.extname(files[i]) === extension){
                 filesFiltered.push(files[i])
             }
         }
