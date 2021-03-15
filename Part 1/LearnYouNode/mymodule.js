@@ -6,7 +6,7 @@ const readDir = (files, extension, callback) => {
     if (err) return callback(err);
 
     let result = [];
-    list.map(file => file.slice(file.lastIndexOf('.'), file.length) == '.'+extension && result.push(file));
+    list.map(file => file.slice(file.lastIndexOf('.'), file.length) === '.'+extension && result.push(file));
 
     callback(null, result);
   });
