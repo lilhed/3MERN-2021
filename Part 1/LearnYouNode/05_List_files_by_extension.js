@@ -8,5 +8,5 @@ fs.readdir(dirPath, function (err, files) {
         return;
     }
 
-    files.filter(name => path.extname(name).toLowerCase() === `.${ext}`).forEach(file => console.log(file));
+    files.filter(name => path.extname(name).toLowerCase() === `.${ext}`).forEach(console.log);
 });
