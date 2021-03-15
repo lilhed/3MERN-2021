@@ -1,4 +1,4 @@
-const [_, _, ...numbers] = process.argv;
+const [_node, _path, ...numbers] = process.argv;
 
 let result = 0;
 
