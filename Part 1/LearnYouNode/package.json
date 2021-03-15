@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bl": "^4.1.0",
-    "strftime": "^0.10.0"
+    "strftime": "^0.10.0",
+    "through2-map": "^3.0.0"
   }
 }
