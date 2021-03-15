@@ -6,7 +6,7 @@ module.exports = function(dir, ext, callback){
             return callback(err, [])
         }
         let array = []
-        for(i = 0; i < list.length; i++){
+        for(let i = 0; i < list.length; i++){
             const item = list[i]
             const split = item.split('.')
             if(split[1] && split[1] === ext){
