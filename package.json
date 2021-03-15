@@ -1,0 +1,25 @@
+{
+  "name": "3mern-2021",
+  "version": "1.0.0",
+  "description": "| **Part 1 - NodeJS & Express** | Practice  |\r |--|--|\r | *Les bases de NodeJS* | [Practice 1 - LearnYouNode](./Part%201/LearnYouNode) |\r | *Express* | [Practice 2 - ExpressWorks](./Part%201/ExpressWorks) |",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lilhed/3MERN-2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lilhed/3MERN-2021/issues"
+  },
+  "homepage": "https://github.com/lilhed/3MERN-2021#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "pug": "^3.0.2",
+    "stylus": "^0.54.8"
+  }
+}
