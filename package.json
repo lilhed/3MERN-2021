@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "bl": "^4.1.0",
+    "mongodb": "^3.6.4",
     "stylus": "^0.54.8",
     "through2-map": "^3.0.0"
   },
