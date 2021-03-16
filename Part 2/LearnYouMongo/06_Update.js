@@ -9,10 +9,8 @@ mongo.connect(dbUrl, { useUnifiedTopology: true }).then((client) => {
     const filter = { username: 'tinatime' };
     const update = { $set: { age: 40 }};
 
-    users.updateOne(filter, update).then(() => {
-        client.close().then();
-    }).catch(err => {
-        console.error(err);
-        client.close().then();
-    });
+    users.updateOne(filter, update)
+        .then()
+        .catch()
+        .finally(() => client.close().then());
 }).catch(console.error);

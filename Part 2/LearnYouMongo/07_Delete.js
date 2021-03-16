@@ -1,15 +1,13 @@
 const mongo = require('mongodb').MongoClient;
 const dbUrl = 'mongodb://localhost:27017/';
-const dbName = 'learnyoumongo';
-const [ ,, firstName, lastName ] = process.argv;
+const [ ,, dbName, collectionName, id ] = process.argv;
 
 mongo.connect(dbUrl, { useUnifiedTopology: true }).then((client) => {
     const db = client.db(dbName);
-    const users = db.collection('docs');
-    const newUser = { 'firstName': firstName, 'lastName': lastName };
+    const users = db.collection(collectionName);
 
-    users.insertOne(newUser)
-        .then(() => console.log(JSON.stringify(newUser)))
+    users.deleteOne({ _id: id })
+        .then()
         .catch(console.error)
         .finally(() => client.close().then());
 }).catch(console.error);
