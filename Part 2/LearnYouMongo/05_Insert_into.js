@@ -8,7 +8,7 @@ mongo.connect(dbUrl, { useUnifiedTopology: true }).then((client) => {
     const users = db.collection('docs');
     const newUser = { 'firstName': firstName, 'lastName': lastName };
 
-    users.insertOne(newUser).then(result => {
+    users.insertOne(newUser).then(() => {
         console.log(JSON.stringify(newUser));
         client.close().then();
     }).catch(err => {
