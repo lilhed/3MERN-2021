@@ -1,0 +1,21 @@
+const MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost:27017/', function(err, mg){
+    if(err){
+        throw err
+    }
+
+    const db = mg.db(process.argv[2])
+
+    db.collection(process.argv[3]).remove({
+        _id: process.argv[4]
+    }, function(err, data){
+        if(err){
+            throw err
+        }
+
+        console.log(data)
+
+        mg.close()
+    })
+})
