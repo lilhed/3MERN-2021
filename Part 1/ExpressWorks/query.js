@@ -1,5 +1,5 @@
 const express = require('express');
-
+const crypto = require('crypto');
 
 // config
 const port = process.argv[2];
@@ -7,7 +7,9 @@ const app = express();
 
 
 // api endpoints
-app.get('/home', (req, res) => res.send('Hello World!'));
+app.get('/search', (req, res) => {
+  res.send(req.query);
+});
 
 
 // listener

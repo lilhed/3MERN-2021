@@ -11,7 +11,7 @@ app.put('/message/:id', (req, res) => {
   res.send(
     require('crypto')
       .createHash('sha1')
-      .update(new Date().toDateString() + req.params.id)
+      .update(new Date().toDateString() + req.query.id)
       .digest('hex')
   );
 });
