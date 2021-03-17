@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
  *****************************************************/
 
 const TodoSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    priority: Number,
-    done: Boolean,
-    creation: Date,
-    deadline: Date
+    title:          { type: String, default: "" },
+    description:    { type: String, default: "" },
+    priority:       { type: Number, default: 0 },
+    done:           { type: Boolean, default: false },
+    creation:       { type: Date, default: new Date() },
+    deadline:       { type: Date, default: null }
 });
 
 const todos = mongoose.model('Todo', TodoSchema);
@@ -28,15 +28,8 @@ module.exports = {
         return todos.find({}).exec();
     },
 
-    add: (title, description, priority, done, creation, deadline) => {
-        const todo = new todos({
-            title: title ?? "",
-            description: description ?? "",
-            priority: Number(priority ?? 0),
-            done: (done === "true"),
-            creation: creation ? new Date(creation) : "",
-            deadline: deadline ? new Date(deadline) : ""
-        });
+    add: (properties) => {
+        const todo = new todos(removeEmptyProperties(properties));
 
         return todo.save();
     },

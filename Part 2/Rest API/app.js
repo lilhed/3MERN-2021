@@ -36,8 +36,16 @@ app.get('/get/list/:id?', async (request, response) => {
 
 app.post('/add/todo/', urlEncodedParser, (request, response) => {
     const params = request.body;
+    const properties = {
+        'title': params.title,
+        'description': params.description,
+        'priority': params.priority,
+        'done': params.done,
+        'creation': params.creation,
+        'deadline': params.deadline
+    }
 
-    todo.add(params.title, params.description, params.priority, params.done, params.creation, params.deadline)
+    todo.add(properties)
         .then(result => sendResponse(response, result))
         .catch(err => catchErr(response, err));
 });

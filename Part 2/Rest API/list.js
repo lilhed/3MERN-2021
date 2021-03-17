@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
  *****************************************************/
 
 const ListSchema = new mongoose.Schema({
-    title: String,
-    description: String
+    title:          { type: String, default: "" },
+    description:    { type: String, default: "" }
 });
 
 const lists = mongoose.model('List', ListSchema);
