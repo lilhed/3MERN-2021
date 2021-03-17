@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 const mongoose = require('mongoose');
 const todo = require('./todo.js');
+const list = require('./list.js');
 
 const app = express();
 mongoose.connect(config.db.url, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,16 +18,16 @@ app.get('/get/todo/:id?', async (request, response) => {
     const id = request.params.id;
     let query = id ? todo.get(id) : todo.getAll();
 
-    query.then(t => {
-        if (t) {
-            response.status(200).end(JSON.stringify(t));
-        } else {
-            response.status(204).end();
-        }
-    }).catch(err => {
-        response.status(500).end();
-        console.error(err);
-    });
+    query.then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
+});
+
+app.get('/get/list/:id?', async (request, response) => {
+    const id = request.params.id;
+    let query = id ? list.get(id) : list.getAll();
+
+    query.then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
 });
 
 /*****************************************************
@@ -37,16 +38,16 @@ app.post('/add/todo/', urlEncodedParser, (request, response) => {
     const params = request.body;
 
     todo.add(params.title, params.description, params.priority, params.done, params.creation, params.deadline)
-        .then(result => {
-            if (result) {
-                response.status(200).end(JSON.stringify(result));
-            } else {
-                response.status(404).end();
-            }
-        }).catch(err => {
-            response.status(500).end();
-            console.error(err);
-        });
+        .then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
+});
+
+app.post('/add/list/', urlEncodedParser, (request, response) => {
+    const params = request.body;
+
+    list.add(params.title, params.description)
+        .then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
 });
 
 /*****************************************************
@@ -66,16 +67,20 @@ app.put('/update/todo/', urlEncodedParser, (request, response) => {
     }
 
     todo.update(params.id, properties)
-        .then(result => {
-            if (result) {
-                response.status(200).end(JSON.stringify(result));
-            } else {
-                response.status(404).end();
-            }
-        }).catch(err => {
-            response.status(500).end();
-            console.error(err);
-        });
+        .then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
+});
+
+app.put('/update/list/', urlEncodedParser, (request, response) => {
+    const params = request.body;
+    const properties = {
+        'title': params.title,
+        'description': params.description
+    }
+
+    list.update(params.id, properties)
+        .then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
 });
 
 /*****************************************************
@@ -86,39 +91,45 @@ app.delete('/delete/todo/', urlEncodedParser, (request, response) => {
     const id = request.body.id;
 
     todo.delete(id)
-        .then(result => {
-            if (result) {
-                response.status(200).end(JSON.stringify(result));
-            } else {
-                response.status(404).end();
-            }
-        }).catch(err => {
-        response.status(500).end();
-        console.error(err);
-    });
+        .then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
 });
 
-/*
-app.route('/todo/:id')
-    .get((request, response) => {
-        const id = request.params.id;
+app.delete('/delete/list/', urlEncodedParser, (request, response) => {
+    const id = request.body.id;
 
-        response.end(todo.get(id));
-    })
-    .post((request, response) => {
-        const id = request.params.id;
+    list.delete(id)
+        .then(result => sendResponse(response, result))
+        .catch(err => catchErr(response, err));
+});
 
-        response.end(todo.add(id));
-    })
-    .update((request, response) => {
-        const id = request.params.id;
+/*****************************************************
+ * Functions
+ *****************************************************/
 
-        response.end(todo.update(id));
-    })
-    .delete((request, response) => {
-        const id = request.params.id;
+function sendResponse(res, result) {
+    if (result) {
+        if (result instanceof Array) {
+            if (result.length > 0) {
+                res.status(200).end(JSON.stringify(result));
+            } else {
+                res.status(204).end();
+            }
+        } else {
+            res.status(200).end(JSON.stringify(result));
+        }
+    } else {
+        res.status(204).end();
+    }
+}
 
-        response.end(todo.delete(id));
-    })*/
+function catchErr(res, err) {
+    res.status(500).end();
+    console.error(err);
+}
+
+/*****************************************************
+ * Miscellaneous
+ *****************************************************/
 
 app.listen(config.app.port);

@@ -4,16 +4,12 @@ const mongoose = require('mongoose');
  * Mongoose schemes
  *****************************************************/
 
-const TodoSchema = new mongoose.Schema({
+const ListSchema = new mongoose.Schema({
     title: String,
-    description: String,
-    priority: Number,
-    done: Boolean,
-    creation: Date,
-    deadline: Date
+    description: String
 });
 
-const todos = mongoose.model('Todo', TodoSchema);
+const lists = mongoose.model('List', ListSchema);
 
 /*****************************************************
  * Module
@@ -21,34 +17,30 @@ const todos = mongoose.model('Todo', TodoSchema);
 
 module.exports = {
     get: (id) => {
-        return todos.findById(id).exec();
+        return lists.findById(id).exec();
     },
 
     getAll: () => {
-        return todos.find({}).exec();
+        return lists.find({}).exec();
     },
 
-    add: (title, description, priority, done, creation, deadline) => {
-        const todo = new todos({
+    add: (title, description) => {
+        const list = new lists({
             title: title ?? "",
-            description: description ?? "",
-            priority: Number(priority ?? 0),
-            done: (done === "true"),
-            creation: creation ? new Date(creation) : "",
-            deadline: deadline ? new Date(deadline) : ""
+            description: description ?? ""
         });
 
-        return todo.save();
+        return list.save();
     },
 
     update: (id, properties) => {
         const cleanedProps = removeEmptyProperties(properties);
 
-        return todos.updateOne({ _id: id }, cleanedProps).exec();
+        return lists.updateOne({ _id: id }, cleanedProps).exec();
     },
 
     delete(id) {
-        return todos.deleteOne({ _id: id }).exec();
+        return lists.deleteOne({ _id: id }).exec();
     }
 }
 
