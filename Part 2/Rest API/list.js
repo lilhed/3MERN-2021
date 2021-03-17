@@ -6,10 +6,11 @@ const mongoose = require('mongoose');
 
 const ListSchema = new mongoose.Schema({
     title:          { type: String, default: "" },
-    description:    { type: String, default: "" }
+    description:    { type: String, default: "" },
+    tasks:          [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo' }]
 });
 
-const lists = mongoose.model('List', ListSchema);
+const lists = mongoose.model('List', ListSchema, 'lists');
 
 /*****************************************************
  * Module
@@ -17,11 +18,11 @@ const lists = mongoose.model('List', ListSchema);
 
 module.exports = {
     get: (id) => {
-        return lists.findById(id).exec();
+        return lists.findById(id).populate({ path:'tasks', model:'Todo' }).exec();
     },
 
     getAll: () => {
-        return lists.find({}).exec();
+        return lists.find({}).populate({ path:'tasks', model:'Todo' }).exec();
     },
 
     add: (title, description) => {

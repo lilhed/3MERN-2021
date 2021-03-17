@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const list = require('./list.js');
 
 /*****************************************************
  * Mongoose schemes
  *****************************************************/
 
 const TodoSchema = new mongoose.Schema({
+    list:           { type: mongoose.Types.ObjectId, default: null },
     title:          { type: String, default: "" },
     description:    { type: String, default: "" },
     priority:       { type: Number, default: 0 },
@@ -13,7 +15,7 @@ const TodoSchema = new mongoose.Schema({
     deadline:       { type: Date, default: null }
 });
 
-const todos = mongoose.model('Todo', TodoSchema);
+const todos = mongoose.model('Todo', TodoSchema, 'todos');
 
 /*****************************************************
  * Module
@@ -29,9 +31,22 @@ module.exports = {
     },
 
     add: (properties) => {
-        const todo = new todos(removeEmptyProperties(properties));
+        const cleanedProps = removeEmptyProperties(properties);
+        const todo = new todos(cleanedProps);
 
-        return todo.save();
+        if (cleanedProps.list) {
+            return todo.save()
+                .then(result => {
+                    return list.get(cleanedProps.list)
+                        .then(list => {
+                            list.tasks.push(todo);
+                            list.save();
+                            return todo;
+                        });
+                })
+        } else {
+            return todo.save();
+        }
     },
 
     update: (id, properties) => {
