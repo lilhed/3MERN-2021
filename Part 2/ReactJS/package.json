@@ -1,0 +1,11 @@
+{
+  "name": "reactjs",
+  "version": "1.0.0",
+  "description": "Afin de pratiquer sur ReactJS, nous allons créer une interface utilisant le framework [ReactJS](https://fr.reactjs.org/) et utilisant l'API réalisée dans les exercices précédents.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
