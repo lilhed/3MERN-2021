@@ -7,7 +7,7 @@ MongoClient.connect('mongodb://localhost:27017/', function (err, mg) {
 
     const db = mg.db('learnyoumongo')
 
-    db.collection('docs').insert(JSON.stringify({
+    db.collection('docs').insertOne(JSON.stringify({
         firstName: process.argv[2],
         lastName: process.argv[3]
     }), function (err, data) {
