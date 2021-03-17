@@ -1,5 +1,5 @@
-import {addNewList} from "../controllers/listController";
-import {addNewTodo} from "../controllers/todoController";
+import {addNewList, getLists} from "../controllers/listController";
+import {addNewTodo, getTodos} from "../controllers/todoController";
 
 const routes = (app) => {
     app.route('/list')
@@ -7,9 +7,8 @@ const routes = (app) => {
             console.log(`Request from: ${req.originalUrl}`)
             console.log(`Request from: ${req.method}`)
             next();
-        }, (req, res) => {
-            res.send('Requête GET réussie')
-        })
+        }, getLists)
+
         .post(addNewList);
 
     app.route('/list/:listId')
@@ -21,9 +20,7 @@ const routes = (app) => {
         );
 
     app.route('/list/todo')
-        .get( (req, res) =>
-            res.send('Requête GET réussie')
-        )
+        .get(getTodos)
         .post(addNewTodo);
 
     app.route('/list/todo/:todoId')
