@@ -15,14 +15,3 @@ export const addNewList = (req, res) => {
         res.json(list);
     });
 };
-
-export const addNewTodo = (req, res) => {
-    let newTodo = new Todo(req.body);
-
-    newTodo.save((err, todo) => {
-        if (err) {
-            res.send(err);
-        }
-        res.json(todo);
-    });
-};

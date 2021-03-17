@@ -1,0 +1,17 @@
+import mongoose from "mongoose";
+import { ListSchema } from "../models/listModel";
+import { TodoSchema} from "../models/todoModel";
+
+const List = mongoose.model('List', ListSchema)
+const Todo = mongoose.model('Todo', TodoSchema)
+
+export const addNewTodo = (req, res) => {
+    let newTodo = new Todo(req.body);
+
+    newTodo.save((err, todo) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(todo);
+    });
+};

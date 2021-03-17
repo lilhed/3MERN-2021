@@ -1,5 +1,5 @@
 import {addNewList} from "../controllers/listController";
-import {addNewTodo} from "../controllers/listController";
+import {addNewTodo} from "../controllers/todoController";
 
 const routes = (app) => {
     app.route('/list')
