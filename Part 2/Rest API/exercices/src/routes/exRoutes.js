@@ -1,5 +1,5 @@
-import {addNewList, getLists} from "../controllers/listController";
-import {addNewTodo, getTodos} from "../controllers/todoController";
+import {addNewList, DeleteList, getLists, getListWithID, UpdateList} from "../controllers/listController";
+import {addNewTodo, DeleteTodo, getTodos, getTodoWithID, UpdateTodo} from "../controllers/todoController";
 
 const routes = (app) => {
     app.route('/list')
@@ -12,24 +12,23 @@ const routes = (app) => {
         .post(addNewList);
 
     app.route('/list/:listId')
-        .put( (req, res) =>
-            res.send('Requête PUT réussie')
-        )
-        .delete((req, res) =>
-            res.send('Requête DELETE réussie')
-        );
+        .get(getListWithID)
 
-    app.route('/list/todo')
+        .put(UpdateList)
+
+        .delete(DeleteList)
+
+    app.route('/todo')
         .get(getTodos)
+
         .post(addNewTodo);
 
-    app.route('/list/todo/:todoId')
-        .put( (req, res) =>
-            res.send('Requête PUT réussie')
-        )
-        .delete( (req, res) =>
-            res.send('Requête DELETE réussie')
-        );
+    app.route('/todo/:todoId')
+        .get(getTodoWithID)
+
+        .put(UpdateTodo)
+
+        .delete(DeleteTodo);
 }
 
 export default routes;

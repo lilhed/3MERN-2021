@@ -15,10 +15,37 @@ export const addNewTodo = (req, res) => {
 };
 
 export const getTodos = (req, res) => {
-    Todo.find({}, (err, list) => {
+    Todo.find({}, (err, todo) => {
         if (err) {
             res.send(err);
         }
-        res.json(list);
+        res.json(todo);
+    });
+};
+
+export const getTodoWithID = (req, res) => {
+    Todo.findById(req.params.todoId, (err, todo) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(todo);
+    });
+};
+
+export const UpdateTodo = (req, res) => {
+    Todo.findByIdAndUpdate({ _id: req.params.todoId }, req.body, { new: true }, (err, todo) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(todo);
+    });
+};
+
+export const DeleteTodo = (req, res) => {
+    Todo.remove({ _id: req.params.todoId }, (err) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json({ message: 'Supression de la todo réussie'});
     });
 };

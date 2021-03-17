@@ -23,6 +23,7 @@ export const TodoSchema = new Schema({
         default: Date.now
     },
     Deadline: {
-        type: Date
+        type: Date,
+        default: null
     }
 });
