@@ -1,0 +1,6 @@
+{
+    "development": {
+        "database": "myproject",
+        "uri": "mongodb+srv://nulysse:testtest@cluster0.br2lz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    }
+}
