@@ -21,10 +21,6 @@ server.listen(port, () => {
     console.log(`listening on *:${port}`);
 });
 
-app.get('/', (req, res, next) => {
-    res.render('index');
-});
-
 server.on("error", onError);
 server.on("listening", onListening);
 
