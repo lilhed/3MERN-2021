@@ -5,7 +5,11 @@ const formParser = bodyParser.urlencoded({ extended: false });
 const [ ,, port ] = process.argv;
 
 app.post('/form/', formParser, (request, response) => {
-    response.end(request.body.str.split('').reverse().join(''));
+    if (request.body) {
+        if (request.body.str) {
+            response.end(request.body.str.split('').reverse().join(''));
+        }
+    }
 });
 
 app.listen(port);
