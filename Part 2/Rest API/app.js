@@ -2,6 +2,7 @@ const config = require('./config.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
+const cors = require('cors')
 const mongoose = require('mongoose');
 const todo = require('./todo.js');
 const list = require('./list.js');
@@ -9,6 +10,8 @@ const list = require('./list.js');
 const app = express();
 mongoose.connect(config.db.url, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch(console.error);
+
+app.use(cors());
 
 /*****************************************************
  * GET
@@ -117,6 +120,13 @@ app.delete('/delete/todo/', urlEncodedParser, (request, response) => {
  *****************************************************/
 
 function sendResponse(res, result) {
+    res.set({
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': false,
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+    });
+
     if (result) {
         if (result instanceof Array) {
             if (result.length > 0) {
@@ -141,4 +151,4 @@ function catchErr(res, err) {
  * Miscellaneous
  *****************************************************/
 
-app.listen(config.app.port);
+app.listen(config.app.port, () => { console.log(`Listening on port ${config.app.port}`) });

@@ -1,0 +1,35 @@
+html {
+    background: #282828;
+    color: #FFFFFF;
+}
+
+#listsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.list {
+    width: 700px;
+    background: #1E1E1E;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.list h3 {
+    margin-top: 0;
+    color: #61dafb;
+}
+
+.list table {
+    width: 100%;
+    border: thin #0a0a0a solid;
+    border-collapse: collapse;
+}
+
+.list table th,
+.list table td { border: thin #0a0a0a solid; border-top: none; border-left: none; }
+
+.list table .centeredCell { text-align: center; }
