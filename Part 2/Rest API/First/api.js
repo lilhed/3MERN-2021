@@ -85,27 +85,6 @@ app.get('/lists', function(req, res){
     })
 })
 
-app.get('/create-table/list', function(req, res){
-    MongoClient.connect(url, function(err, db){
-        if(err) throw err;
-        const dbo = db.db('list');
-        dbo.createCollection('list', function(err, res){
-            if(err) throw err;
-            console.log('Collection created!');
-            db.close();
-        });
-    });
-})
-
-app.get('/create-database', function(req, res){
-    MongoClient.connect('mongodb://localhost:27018/todo', function(err, db){
-        if(err) throw err;
-        console.log('Database created!');
-        db.close();
-        res.end();
-    });
-})
-
 app.listen(8000)
 
 // mongod --port 27018 --dbpath=./data
