@@ -26,14 +26,14 @@ router
 /* READ TODOS listing. */
 router
   .get('/', (req, res) => {
-    return TodoController.read((err, datas) => {
+    return TodoController.read((err, todos) => {
       if (err) {
         return res.status(err.code || 500).send(err);
       }
-      if (!datas || !datas.length) {
+      if (!todos || !todos.length) {
         return res.status(204).end();
       }
-      return res.status(200).send(datas);
+      return res.status(200).send(todos);
     });
   });
 

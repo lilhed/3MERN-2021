@@ -1,11 +1,22 @@
-const express = require('express');
+require('dotenv').config({path: './config.env'});
 
-require('./database/connect');
+const express = require('express');
+const cors = require('cors');
+
+const connectDB = require('./database/connect');
 const todoRouter = require('./routes/todo');
 
-const app = express();
 const port = process.argv[2] | 9000;
+const app = express();
+connectDB();
 
+var corsOpts = {
+  origin: ['http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE']
+};
+
+app.use(cors(corsOpts));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
