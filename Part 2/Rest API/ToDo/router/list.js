@@ -16,8 +16,16 @@ router.post('/', (req, res) => {
             return res.redirect(req.body.redirect)
         }
 
+        return res.json({
+            'success': true,
+            'list': list
+        })
+
         return res.status(200).end()
     }).catch((err) => {
+        return res.json({
+            'success': false
+        })
         return res.status(err.code || 500).send(err)
     })
 })
@@ -31,7 +39,7 @@ router.get('/', (req, res) => {
 router.get('/:_id', (req, res) => {
     const listId = req.params._id
 
-    if(!listId) {
+    if(!listId){
         return res.status(400).send('Invalid List ID')
     }
 

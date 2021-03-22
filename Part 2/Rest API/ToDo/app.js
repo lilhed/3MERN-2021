@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 
 require('./database/connect')
 
@@ -13,6 +14,9 @@ app.use(cors())
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
+const staticPath = path.join(__dirname, '/views')
+app.use(express.static(staticPath))
 
 app.use('/lists/:list_id/todos', todoRouter)
 app.use('/lists', listRouter)
