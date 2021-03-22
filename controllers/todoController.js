@@ -29,5 +29,20 @@ module.exports = {
                 return callback(null, docs);
             });
         })
+    },
+    delete: (datas, callback) => {
+        return database.connection((client, db) => {
+            const collection = db.collection('todos');
+
+            const entity = datas;
+
+            collection.delete(entity,(err, data) =>{
+                if (err){
+                    return callback(err)
+                }
+
+                return callback(null,data);
+            })
+        });
     }
 };

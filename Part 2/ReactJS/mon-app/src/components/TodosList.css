@@ -1,0 +1,9 @@
+tr{
+    border:solid thin black;
+}
+
+ul{
+    display: inline;
+    padding-left: 5%;
+    list-style: none;
+}

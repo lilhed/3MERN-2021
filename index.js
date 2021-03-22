@@ -39,8 +39,16 @@ app.route('/')
         res.end('put')
     })
     .delete(function(req, res) {
-        var id = req.params.id
-        res.end('delete')
+        const id = req.body.id
+        return TodoController.delete((err,data) => {
+            if (err){
+                return res.status(err.code || 500).send(err);
+            }
+            if(!data || !data.length){
+                return res.status(204).end();
+            }
+            return res.status(200).send(data);
+        });
     })
 
 app.route('/list/:id')
