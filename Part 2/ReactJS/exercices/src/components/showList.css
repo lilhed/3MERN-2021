@@ -1,0 +1,8 @@
+tr{
+    border:solid thin black;
+}
+
+ul{
+    display: inline;
+    list-style: none;
+}

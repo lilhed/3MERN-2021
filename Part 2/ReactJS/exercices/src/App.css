@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+table{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border:solid thin rgba(0, 0, 0, 0.281);
+  border-radius: 5px;
+}
