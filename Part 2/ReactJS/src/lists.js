@@ -49,43 +49,65 @@ class List extends React.Component {
 
         return (
             <div className="list">
-                <h3>{list.title}</h3>
-                <p>{list.description}</p>
-                <table className="listTasks">
-                    <thead>
-                        <tr>
-                            <th>Titre</th>
-                            <th>Description</th>
-                            <th>Priorit&eacute;</th>
-                            <th>Fait</th>
-                            <th>Cr&eacute;ation</th>
-                            <th>Deadline</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {list.tasks.map((task, i) => {
-                            return (<Task key={i} task={task} />);
-                        })}
-                    </tbody>
-                </table>
+                <h2 className="listTitle">{list.title}</h2>
+                <p className="listDesc">{list.description}</p>
+                <h3 className="tasksTitle">T&acirc;ches</h3>
+                <div className="listTasks">
+                    {list.tasks
+                        .sort((tA, tB) => {
+                            return tA.priority === tB.priority
+                                ? (tA.title.localeCompare(tB.title))
+                                : (tA.priority > tB.priority ? 1 : -1)
+                        })
+                        .map((task, i) => {
+                        return (<Task key={i} task={task} />);
+                    })}
+                </div>
             </div>
         );
     }
 }
 
 class Task extends React.Component {
+    makeTaskDone() {
+        const params = {
+            method: 'PUT',
+            headers: { Accept: 'application/json' },
+            body: JSON.stringify({a: 1, b: 'Textual content'})};
+
+        fetch('http://localhost:1234/update/todo/', params)
+            .then(results => results.json())
+            .then(json => {
+                this.setState({
+                    lists: json,
+                    isLoaded: true
+                });
+            })
+            .catch(console.error);
+    }
+
     render() {
         const task = this.props.task;
 
         return (
-            <tr className="task">
-                <td>{task.title}</td>
-                <td>{task.description}</td>
-                <td className="centeredCell">{task.priority}</td>
-                <td className="centeredCell">{task.done ? "Oui" : "Non"}</td>
-                <td className="centeredCell">{task.creation}</td>
-                <td className="centeredCell">{task.deadline}</td>
-            </tr>
+            <div className={`task priority${task.priority} ${task.done ? "done" : "not_done"}`}>
+                <div className="taskCheck">
+                    <input type="checkbox" onChange={this.makeTaskDone} checked={task.done}/>
+                </div>
+
+                <div className="taskContent">
+                    <div className="taskHead">
+                        <h4 className="taskTitle">{task.title}</h4>
+                        <p className="taskCreation">{task.creation}</p>
+                    </div>
+
+                    <p className="taskDesc">{task.description}</p>
+
+                    {task.deadline ? (
+                        <p className="taskDeadline">&rarr; {task.deadline}</p>
+                    ) : null}
+                </div>
+            </div>
         );
     }
 }

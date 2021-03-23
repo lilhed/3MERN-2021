@@ -3,6 +3,10 @@ html {
     color: #FFFFFF;
 }
 
+/****************************
+ * Lists
+ ****************************/
+
 #listsContainer {
     display: flex;
     flex-direction: row;
@@ -18,18 +22,64 @@ html {
     padding: 20px;
 }
 
-.list h3 {
+.listTitle {
     margin-top: 0;
+    margin-bottom: 0;
     color: #61dafb;
 }
 
-.list table {
-    width: 100%;
-    border: thin #0a0a0a solid;
-    border-collapse: collapse;
+.listDesc { margin-top: 5px; }
+
+.tasksTitle {
+    margin-top: 30px;
+    color: #61dafb;
 }
 
-.list table th,
-.list table td { border: thin #0a0a0a solid; border-top: none; border-left: none; }
+/****************************
+ * Tasks
+ ****************************/
 
-.list table .centeredCell { text-align: center; }
+/* Task */
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background: #1E1E1E;
+    padding: 10px;
+}
+.task:hover { background: #0e0e0e; }
+
+.task.priority1 { font-size: 1em; }
+.task.priority2 { font-size: 0.9em; }
+.task.priority3 { font-size: 0.8em; }
+
+/* Task check */
+.taskCheck { padding: 0 10px 0 0; }
+
+/* Task content */
+.taskHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.taskTitle { margin: 0; }
+.task.done .taskTitle { color: #5fb70b }
+
+.taskCreation {
+    font-size: 0.7em;
+    margin: 0 0 0 10px;
+    color: #757575;
+}
+.task.done .taskCreation { color: #3a750a }
+
+.taskDesc { margin: 0 0 0 0; }
+.task.done .taskDesc { color: #5fb70b }
+
+.taskDeadline {
+    font-size: 0.9em;
+    margin: 0;
+    color: #ca3232;
+}
