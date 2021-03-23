@@ -2,6 +2,7 @@ const Todo = require('../models/todo_model.js');
 
 module.exports = {
     create: (req, res) => {
+        addCors(res);
         if(!req.body) {
             return res.status(400).send({
                 message: "Create: Todo can not be empty"
@@ -28,6 +29,7 @@ module.exports = {
     },
 
     readAll: (req, res) => {
+        addCors(res);
         Todo.find()
             .then(todos => {
                 res.send(todos);
@@ -39,6 +41,7 @@ module.exports = {
     },
 
     read: (req, res) => {
+        addCors(res);
         Todo.findById(req.params.todoId)
             .then(todo => {
                 if(!todo) {
@@ -60,6 +63,7 @@ module.exports = {
     },
 
     update: (req, res) => {
+        addCors(res);
         if(!req.body) {
             return res.status(400).send({
                 message: "Update: Todo can not be empty"
@@ -94,6 +98,7 @@ module.exports = {
     },
 
     delete: (req, res) => {
+        addCors(res);
         Todo.findByIdAndRemove(req.params.todoId)
             .then(todo => {
                 if(!todo) {
@@ -113,4 +118,13 @@ module.exports = {
             });
         });
     }
+}
+
+function addCors(res){
+    res.set({
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': false,
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+    });
 }

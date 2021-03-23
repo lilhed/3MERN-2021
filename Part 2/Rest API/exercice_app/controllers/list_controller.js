@@ -2,6 +2,7 @@ const List = require('../models/list_model.js');
 
 module.exports = {
     create: (req, res) => {
+        addCors(res);
         if(!req.body) {
             return res.status(400).send({
                 message: "Create: List can not be empty"
@@ -24,6 +25,7 @@ module.exports = {
     },
 
     readAll: (req, res) => {
+        addCors(res);
         List.find()
             .then(lists => {
                 res.send(lists);
@@ -35,6 +37,7 @@ module.exports = {
     },
 
     read: (req, res) => {
+        addCors(res);
         List.findById(req.params.listId)
             .then(list => {
                 if(!list) {
@@ -56,6 +59,7 @@ module.exports = {
     },
 
     update: (req, res) => {
+        addCors(res);
         if(!req.body) {
             return res.status(400).send({
                 message: "Update: List can not be empty"
@@ -86,6 +90,7 @@ module.exports = {
     },
 
     delete: (req, res) => {
+        addCors(res);
         List.findByIdAndRemove(req.params.listId)
             .then(list => {
                 if(!list) {
@@ -105,4 +110,13 @@ module.exports = {
             });
         });
     }
+}
+
+function addCors(res){
+    res.set({
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': false,
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+    });
 }

@@ -13,14 +13,6 @@ function App() {
         <div>
             <h2>List of To Do Tasks</h2>
             <div className="All-Todos">
-                <DisplayTodoList
-                    title="Pedro's ToDolist"
-                    description="It is the To Do List of Pedro"
-                    priority="23"
-                    done="false"
-                    creation="22/06"
-                    deadline="23/06"
-                />
                 <DisplayTodoList/>
             </div>
             <hr/>
