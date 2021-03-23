@@ -7,7 +7,6 @@ function ShowList(props) {
                 <ul>
                     <li>Titre : {props.title}</li>
                     <li>Description : {props.description}</li>
-                    <li>Priorité : {props.priority}</li>
                 </ul>
             </td>
         </tr>

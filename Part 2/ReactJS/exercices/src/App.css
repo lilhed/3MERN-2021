@@ -7,9 +7,34 @@ header {
   justify-content: center;
 }
 
-table{
+#lists {
   margin-top: 5%;
-  margin-bottom: 5%;
   border:solid thin rgba(0, 0, 0, 0.281);
   border-radius: 5px;
+  display:inline-block;
+  margin-left: 20%;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+#todos {
+  margin-top: 5%;
+  border:solid thin rgba(0, 0, 0, 0.281);
+  border-radius: 5px;
+  display: inline-block;
+  margin-left: 29%;
+  vertical-align: top;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+#addLists {
+  margin-top: 3%;
+  display: inline-block;
+}
+
+#addTodos {
+  display: inline-block;
 }

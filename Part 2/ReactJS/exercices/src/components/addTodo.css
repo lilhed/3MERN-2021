@@ -1,12 +1,12 @@
-.addList label{
+.addTodo label{
     margin-left: 10px;
 }
 
-.addList input {
+.addTodo input {
     margin-right: 10px;
 }
 
 p {
     font-weight: bold;
-    text-align: center
+    text-align:center;
 }
