@@ -14,9 +14,9 @@ module.exports = {
       })
     })
   },
-  read: (_id) => {
+  read: (_id, user_id) => {
     return new Promise((resolve, reject) => {
-      const filter = {}
+      const filter = { 'user': user_id }
 
       if (_id) {
         filter._id = _id
@@ -42,9 +42,9 @@ module.exports = {
       })
     })
   },
-  update: (_id, data) => {
+  update: (_id, user_id, data) => {
     return new Promise((resolve, reject) => {
-      return ListModel.findOne({ _id }, (err, list) => {
+      return ListModel.findOne({ '_id': _id, 'user': user_id }, (err, list) => {
         if (err) {
           return reject(err)
         }
@@ -53,7 +53,9 @@ module.exports = {
           return reject(new Error('List does not exist'))
         }
 
-        return ListModel.updateOne({ _id }, { $set: data }, (updateErr, updateList) => {
+        list.user = user_id
+
+        return ListModel.updateOne({ '_id': _id, 'user': user_id }, { $set: data }, (updateErr, updateList) => {
           if (updateErr) {
             return reject(updateErr)
           }
@@ -63,9 +65,9 @@ module.exports = {
       })
     })
   },
-  delete: (_id) => {
+  delete: (_id, user_id) => {
     return new Promise((resolve, reject) => {
-      return ListModel.deleteOne({ _id }, (err) => {
+      return ListModel.deleteOne({ '_id': _id, 'user': user_id }, (err) => {
         if (err) {
           return reject(err)
         }

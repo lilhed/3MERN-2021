@@ -29,7 +29,8 @@ const TodoSchema = new Schema({
     },
     list: {
         type: Schema.ObjectId,
-        ref: 'List'
+        ref: 'List',
+        required: true
     }
 })
 

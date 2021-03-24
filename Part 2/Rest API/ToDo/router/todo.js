@@ -16,6 +16,8 @@ router.post('/', (req, res) => {
         return res.status(400).send('Invalid List ID')
     }
 
+    todo.list = listId
+
     return TodoController.create(todo, listId).then(() => {
         if(req.body && req.body.redirect){
             return res.redirect(req.body.redirect)
