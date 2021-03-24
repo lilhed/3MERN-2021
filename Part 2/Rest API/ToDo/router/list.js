@@ -22,7 +22,8 @@ router.post('/', (req, res) => {
       'success': true,
       'list': list
     })
-  }).catch(() => {
+  }).catch((err) => {
+    console.log(err)
     return res.json({
       'success': false
     })

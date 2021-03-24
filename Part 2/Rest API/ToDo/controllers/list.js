@@ -1,4 +1,5 @@
 const ListModel = require('../models/list')
+const UserController = require('../controllers/user')
 
 module.exports = {
   create: (data) => {
@@ -10,7 +11,20 @@ module.exports = {
           return reject(err)
         }
 
-        return resolve(list)
+        console.log(data.user)
+
+        return UserController.read(data.user).then((user) => {
+          user.lists.push(newList)
+
+          console.log(user)
+
+          user.save()
+
+          return resolve(list)
+        }).catch((err) => {
+          console.log(err)
+          return reject(new Error('User not found'))
+        })
       })
     })
   },

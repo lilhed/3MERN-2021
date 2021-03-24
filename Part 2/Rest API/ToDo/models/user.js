@@ -29,7 +29,7 @@ const UserSchema = new Schema({
   },
   lists: [
     {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'List'
     }
   ]

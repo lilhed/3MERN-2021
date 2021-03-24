@@ -16,16 +16,10 @@ const ListSchema = new Schema({
     default: false
   },
   user: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  },
-  todos: [
-    {
-      type: Schema.ObjectId,
-      ref: 'Todo'
-    }
-  ]
+  }
 })
 
 module.exports = mongoose.model('List', ListSchema)

@@ -40,13 +40,6 @@ module.exports = {
           return reject(err)
         }
 
-        user = JSON.parse(JSON.stringify(user));
-
-        user.forEach(obj => {
-          obj.id = obj._id;
-          delete obj._id;
-        });
-
         return resolve(user[0])
       })
     })
