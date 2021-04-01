@@ -19,7 +19,7 @@ const Presenter = () => {
       </ScrollPage>
       <ScrollPage page={1}>
         <Animator animation={ZoomInScrollOut}>
-          <span style={{ fontSize: "3em" }}>I'm FadeUpScrollOut ✨</span>
+          <span style={{ fontSize: "3em" }}>I'm FadeUpScrollOut hello hello  ✨</span>
         </Animator>
       </ScrollPage>
       <ScrollPage page={2}>
@@ -46,5 +46,6 @@ const Presenter = () => {
         </Animator>
       </ScrollPage>
     </ScrollContainer>
+    
   );
 };
